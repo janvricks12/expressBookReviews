@@ -11,8 +11,15 @@ app.use(express.json());
 app.use("/customer",session({secret:"fingerprint_customer",resave: true, saveUninitialized: true}))
 
 app.use("/customer/auth/*", function auth(req,res,next){
-//Write the authenication mechanism here
-});
+    const { username, password } = req.body;
+    // Simulated user authentication (replace with actual logic)
+    if (username === 'user' && password === 'password') {
+      req.session.user = username;  // Store user information in session
+      res.send('Logged in successfully');
+    } else {
+      res.send('Invalid credentials');
+    }
+  });
  
 const PORT =5000;
 
