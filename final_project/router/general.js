@@ -12,8 +12,13 @@ public_users.post("/register", (req,res) => {
 
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  try {
+    // Assuming `books` is an array of book objects, you can return this directly
+    res.status(200).json(JSON.parse(JSON.stringify(books)));  // Use JSON.stringify for neat output
+  } catch (error) {
+    console.error("Error fetching book list:", error);
+    res.status(500).json({ message: "Failed to retrieve books" });
+  }
 });
 
 // Get book details based on ISBN
